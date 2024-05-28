@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="ja">
+    <title>Clipboard</title>
+</head>
+<script>
+function main() {
+    document.addEventListener("click", function(event){
+        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+            navigator.clipboard.readText().then(text => {
+                event.target.value = text;
+            });
+        }
+    });
+    document.addEventListener("click", function(event){
+        console.log(event.target.innerHTML);
+        if (event.target.tagName === 'DIV') {
+            navigator.clipboard.writeText(event.target.innerHTML);
+        }
+    });
+}
+window.onload = main;
+</script>
+
+<div style="user-select: all;">1test test test</div>
+<div style="user-select: all;">2test test test</div>
+
+<div class="all">3test test test</div>
+
+<div class="all" onclick="">4test test test
+test test</div>
+
+<input type="text">
+
+<textarea name="example" cols="50" rows="10"></textarea>
+
+<style>
+.all {
+  border: 1px solid black;
+  margin: 20px;
+  padding: 10px;
+  user-select: all;
+  white-space: pre;
+}
+</style>
+
+<html>
